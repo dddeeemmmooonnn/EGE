@@ -10,6 +10,7 @@ use utf8;
 
 use EGE::Random;
 use EGE::Bits;
+use EGE::NumText;
 
 use List::Util qw(min max);
 
@@ -77,6 +78,32 @@ QUESTION
     $self->{correct} = _get_min_origin($result);
     $result == _convert($self->{correct}) or die "$orig => $result, min = $self->{correct}";
     $self->{correct} <= $orig or die "$orig => $result, min = $self->{correct}";
+}
+
+sub grasshopper {
+    my ($self) = @_;
+
+    my $gcd = rnd->in_range(2, 5);
+    my $forward = rnd->pick(3, 5, 7, 11, 13, 17, 19);
+    my $backward = rnd->in_range_except(2, 20, $forward);
+    my $back_cnt = rnd->in_range(2, $forward - 1);
+
+    my $offset = (($forward - $backward) * $back_cnt) % $forward;
+
+    my $start_pnt = rnd->in_range(0, 20);
+    my $end_pnt = $start_pnt + $offset * $gcd;
+    my ($fg, $bg) = ($forward * $gcd, $backward * $gcd);
+    my ($fg_text, $bg_text) = map num_text($_, [ qw(единицу единицы единиц) ]), $fg, $bg;
+
+    $self->{text} = 
+        'Исполнитель КУЗНЕЧИК живёт на числовой оси. ' .
+        "Начальное положение КУЗНЕЧИКА – точка $start_pnt. Система команд Кузнечика:<br /> " .
+        "Вперед $fg – Кузнечик прыгает вперёд на $fg_text,<br /> " .
+        "Назад $bg – Кузнечик прыгает назад на $bg_text.<br /> " .
+        "Какое наименьшее количество раз должна встретиться в программе команда «Назад $bg», " .
+        "чтобы Кузнечик оказался в точке $end_pnt?";
+    $self->{correct} = $back_cnt;
+    $self->accept_number;
 }
 
 1;

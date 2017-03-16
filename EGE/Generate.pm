@@ -65,9 +65,11 @@ use EGE::Gen::EGE::Z06;
 use EGE::Gen::EGE::Z09;
 use EGE::Gen::EGE::Z10;
 use EGE::Gen::EGE::Z11;
+use EGE::Gen::EGE::Z12;
 use EGE::Gen::EGE::Z13;
 use EGE::Gen::EGE::Z15;
 use EGE::Gen::EGE::Z16;
+use EGE::Gen::EGE::Z18;
 use EGE::Gen::EGE::Z22;
 
 sub g {
@@ -119,13 +121,15 @@ sub all {[
     gg('B13', qw(plus_minus)),
     gg('B14', qw(find_func_min)),
     gg('B15', qw(logic_var_set)),
-    gg('Z06', qw(find_number min_add_digits)),
+    gg('Z06', qw(find_number min_add_digits grasshopper)),
     gg('Z09', qw(get_memory_size)),
     gg('Z10', qw(words_count)),
     gg('Z11', qw(recursive_alg)),
-    gg('Z13', qw(tumblers tumblers_min)),
+    gg('Z12', qw(ip_computer_number)),
+    gg('Z13', qw(tumblers tumblers_min young_spy)),
     gg('Z15', qw(city_roads)),
     gg('Z16', qw(base_gcd)),
+    gg('Z18', qw(bitwise_conjunction)),
     gg('Z22', qw(calculator_find_prgm_count)),
 ]}
 
